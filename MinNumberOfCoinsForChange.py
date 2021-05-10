@@ -10,5 +10,4 @@ def minNumberOfCoinsForChange(n, denoms):
             else:
                 lst[i] = 1 + lst[i - denom]
 		print(denom, lst)
-        
     return lst[-1]
