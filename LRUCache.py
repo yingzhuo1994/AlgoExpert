@@ -9,8 +9,7 @@ class LRUCache:
         self.after = {}
         self.start = 'start'
         self.end = 'end'
-        self.after[self.start] = self.end
-        self.before[self.end] = self.start
+        self.connect(self.start, self.end)
 
 
     def insertKeyValuePair(self, key, value):
@@ -33,22 +32,19 @@ class LRUCache:
         val = self.cache[key]
         self.renewKey(key, val)
         return key
+    
+    def connect(self, a, b):
+        self.after[a], self.before[b] = b, a
 
     def deleteKey(self, key):
         if key in self.cache:
             self.cache.pop(key)
-            self.after[self.before[key]] = self.after[key]
-            self.before[self.after[key]] = self.before[key]
+            self.connect(self.before[key], self.after[key])
             self.before.pop(key)
             self.after.pop(key)
     
     def renewKey(self, key, value):
-        print(self.cache)
-        print('before', self.before)
-        print('after', self.after)
         self.deleteKey(key)
         self.cache[key] = value
-        self.after[key] = self.end
-        self.before[key] = self.before[self.end]
-        self.after[self.before[key]] = key
-        self.before[self.end] = key
+        self.connect(self.before[self.end], key)
+        self.connect(key, self.end)
