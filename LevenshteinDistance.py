@@ -33,3 +33,15 @@ def levenshteinDistance(str1, str2):
                 table[i][j] = cur + 1
     return table[-1][-1]
 
+    # 3rd solution
+    cur = [j for j in range(len(str2) + 1)]
+    for i in range(1, len(str1) + 1):
+		last = cur
+		cur = [i for j in range(len(str2) + 1)]
+		for j in range(1, len(str2) + 1):
+			if str1[i - 1] == str2[j - 1]:
+				cur[j] = last[j - 1]
+			else:
+				cur[j] = 1 + min(cur[j - 1], last[j - 1], last[j])
+	return cur[-1]
+
