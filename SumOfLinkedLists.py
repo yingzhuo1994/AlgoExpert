@@ -4,7 +4,8 @@ class LinkedList:
         self.value = value
         self.next = None
 
-
+# O(max(n, m)) time | O(max(n, m)) space 
+# where n, m are the lengh of the first and the second Linked List separately
 def sumOfLinkedLists(linkedListOne, linkedListTwo):
     # Write your code here.
     sentinel = LinkedList(0)
