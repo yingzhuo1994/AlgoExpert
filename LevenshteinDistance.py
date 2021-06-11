@@ -19,12 +19,9 @@ def levenshteinDistance(str1, str2):
     return min(insertOpt, deletionOpt, substitutionOpt)
 
     # 2nd dynamic solution
-    table = [[0 for j in range(len(str2) + 1)] for i in range(len(str1) + 1)]
-    for j in range(1, len(str2) + 1):
-        table[0][j] = j
+    table = [[j for j in range(len(str2) + 1)] for i in range(len(str1) + 1)]
     for i in range(1, len(str1) + 1):
         table[i][0] = i
-    for i in range(1, len(str1) + 1):
         for j in range(1, len(str2) + 1):
             cur = min(table[i-1][j], table[i][j-1], table[i-1][j-1])
             if str1[i-1] == str2[j-1]:
