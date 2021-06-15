@@ -1,4 +1,5 @@
 # 1st solution
+# O(kn) time | O(n) space
 def staircaseTraversal(height, maxSteps):
     # Write your code here.
     lst = [ 0 for _ in range(height + 1)]
