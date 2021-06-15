@@ -5,23 +5,23 @@ class LinkedList:
         self.next = None
 
 
+# O(n) time | O(1) time
 def removeKthNodeFromEnd(head, k):
-    # Write your code here.
-    size = 0
-    p = head
-    while p:
-        p = p.next
-        size += 1
-    if k == size:
-        if head.next:
-            head.value = head.next.value
-            head.next = head.next.next
-        else:
-            head = head.next
-    else:
-        p = head
-        while size - k - 1 > 0:
-            p = p.next
-            k += 1
-        p.next = p.next.next
+    counter = 1
+    first = head
+    second = head
+    while counter <= k:
+        second = second.next
+        counter += 1
+    
+    if not second:
+        head.value = head.next.value
+        head.next = head.next.next
+        return 
+    
+    while second.next:
+        second = second.next
+        first = first.next
+    first.next = first.next.next
+
     
