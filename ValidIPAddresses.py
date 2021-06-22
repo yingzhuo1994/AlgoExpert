@@ -2,9 +2,9 @@ def validIPAddresses(string):
     # Write your code here.
     lst = []
     n = len(string)
-    for i in range(1, n):
-        for j in range(i + 1, n):
-            for k in range(j + 1, n):
+    for i in range(1, min(n, 4)):
+        for j in range(i + 1, i + min(n - i, 4)):
+            for k in range(j + 1, j + min(n - j, 4)):
                 first = string[:i]
                 second = string[i:j]
                 third = string[j:k]
@@ -13,12 +13,9 @@ def validIPAddresses(string):
                     validIP = first + '.' + second + '.' + third + '.' + forth
                     lst.append(validIP)
     return lst
-    
+
 def check(s):
     num = int(s)
-    if 0 < num <= 255 and int(s[0]) != 0:
-        return True
-    elif num == 0 and len(s) == 1:
-        return True
-    else:
+    if num > 255:
         return False
+    return len(s) == len(str(num))
