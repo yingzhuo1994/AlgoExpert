@@ -32,3 +32,11 @@ def powerset(array, idx = None):
         currentSubset = subsets[i]
         subsets.append(currentSubset + [elem])
     return subsets
+
+# 4th solution
+def powerset(array):
+    # Write your code here.
+    lst = [[]]
+	for num in array:
+		lst += [k + [num] for k in lst]
+	return lst
