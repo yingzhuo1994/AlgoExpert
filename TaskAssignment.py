@@ -1,5 +1,5 @@
+# 1st solution
 def taskAssignment(k, tasks):
-    # Write your code here.
     indexInOrder = []
     count = 0
     smallestIndex = 0
@@ -20,3 +20,49 @@ def taskAssignment(k, tasks):
         start += 1
         end -= 1
     return result
+
+# 2nd solution
+# O(nlogn) time | O(n) space - where n is the number of tasks
+def taskAssignment(k, tasks):
+    pairedTasks = []
+    taskDurationsToIndices = getTaskDurationsToIndices(tasks)
+
+    sortedTasks = sorted(tasks)
+    for idx in range(k):
+        taskOneDuration = sortedTasks[idx]
+        indicesWithTaskOneDuration = taskDurationsToIndices[taskOneDuration]
+        taskOneIndex = indicesWithTaskOneDuration.pop()
+
+        taskTwoSortedIndex = len(tasks) - 1 - idx
+        taskTwoDuration = sortedTasks[taskTwoSortedIndex]
+        indicesWithTaskTwoDuration = taskDurationsToIndices[taskTwoDuration]
+        taskTwoIndex = indicesWithTaskTwoDuration.pop()
+
+        pairedTasks.append([taskOneIndex, taskTwoIndex])
+    
+    return pairedTasks
+
+def getTaskDurationsToIndices(tasks):
+    taskDurationsToIndices = {}
+
+    for idx, taskDuration in enumerate(tasks):
+        if taskDuration in taskDurationsToIndices:
+            taskDurationsToIndices[taskDuration].append(idx)
+        else:
+            taskDurationsToIndices[taskDuration] = [idx]
+    
+    return taskDurationsToIndices
+
+# 3rd solution
+# O(nlogn) time | O(n) space - where n is the number of tasks
+def taskAssignment(k, tasks):
+    dic = {}
+	for i, num in enumerate(tasks):
+		dic[num] = dic.get(num, []) + [i]
+	lst  = sorted(tasks)
+	result = []
+	for i in range(len(lst) // 2):
+		first = dic[lst[i]].pop()
+		second = dic[lst[len(lst) - 1 - i]].pop()
+		result.append([first, second])
+	return result
