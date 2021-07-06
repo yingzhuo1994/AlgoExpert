@@ -1,7 +1,6 @@
+# 1st solution
+# O(n^2) time | O(1) space
 def validStartingCity(distances, fuel, mpg):
-    # Write your code here.
-    # 1st solution
-    # O(n^2) time | O(1) space
     n = len(fuel)
     for i in range(n):
         miles = fuel[i] * mpg
@@ -15,7 +14,9 @@ def validStartingCity(distances, fuel, mpg):
             if j == i:
                 return i
 
-    # O(n) time | O(1) space
+# 2nd solution
+# O(n) time | O(1) space
+def validStartingCity(distances, fuel, mpg):
     if sum(fuel) * mpg - sum(distances) < 0:
         return -1
     
