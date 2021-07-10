@@ -35,7 +35,6 @@ def powerset(array, idx = None):
 
 # 4th solution
 def powerset(array):
-    # Write your code here.
     lst = [[]]
 	for num in array:
 		lst += [k + [num] for k in lst]
