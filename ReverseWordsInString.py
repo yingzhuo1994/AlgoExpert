@@ -1,22 +1,29 @@
 # 1st solution
 # O(n) time | O(n) space
 def reverseWordsInString(string):
-    # Write your code here.
     words = []
     startOfWord = 0
     for idx in range(len(string)):
-        ch = string[idx]
+        character = string[idx]
 
-        if ch == ' ':
-            words.append(string[startOfWord:idx])
-            startOfWord = idx
-        elif string[startOfWord] == ' ':
-            words.append(' ')
-            startOfWord = idx
-    
-    words.append(string[startOfWord:])
+		if character == ' ':
+			words.append(string[startOfWord:idx])
+			startOfWord = idx
+		elif string[startOfWord] == ' ':
+			words.append(' ')
+			startOfWord = idx
+        
+	words.append(string[startOfWord:])
 
-    return ''.join(words[::-1])
+	reverseList(words)
+	return ''.join(words)
+
+def reverseList(lst):
+    start, end = 0, len(lst) - 1
+    while start < end:
+        lst[start], lst[end] = lst[end], lst[start]
+        start += 1
+        end -= 1
 
 # 2nd soluion
 # O(n) time | O(n) space
