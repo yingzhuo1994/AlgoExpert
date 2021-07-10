@@ -1,10 +1,6 @@
 # Upper Bound: O(n^2*n!) time | O(n*n!) space
 # Roughly: O(n*n!) time | O(n*n!) space
 def getPermutations(array):
-    # Write your code here.
-    if not array:
-        return []
-
     if len(array) == 1:
         return [array]
     
