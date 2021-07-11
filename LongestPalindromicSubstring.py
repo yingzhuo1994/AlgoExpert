@@ -20,18 +20,15 @@ def isPalindrome(string, start, end):
 # 2nd solution
 # O(n^2) time | O(n) space
 def longestPalindromicSubstring(string):
-    def helper(s, start, end):
-        while start >= 0 and end < len(s) and s[start] == s[end]:
-            start -= 1
-            end += 1
-        return [start + 1, end - 1]
-
     pair = [0, 0]
     for i in range(len(string) - 1):
-        pair0 = helper(string, i, i)
-        pair1 = helper(string, i, i + 1)
-        if pair0[1] - pair0[0] > pair[1] - pair[0]:
-            pair = pair0
-        if pair1[1] - pair1[0] > pair[1] - pair[0]:
-            pair = pair1
+        odd = getLongestPalindromeFrom(string, i, i)
+        even = getLongestPalindromeFrom(string, i, i + 1)
+        pair = max(pair, odd, even, key = lambda x: x[1] - x[0])
     return string[pair[0]:pair[1] + 1]
+
+def getLongestPalindromeFrom(s, start, end):
+    while start >= 0 and end < len(s) and s[start] == s[end]:
+        start -= 1
+        end += 1
+    return [start + 1, end - 1]
