@@ -1,3 +1,4 @@
+# O(n) time | O(n) space
 def zigzagTraverse(array):
     row = len(array) - 1
     col = len(array[0]) - 1
