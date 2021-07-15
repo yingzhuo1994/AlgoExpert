@@ -16,4 +16,23 @@ def threeNumberSort(array, order):
         else:
             i += 1
     return array
-     
+
+# 2nd solution
+# O(n) time | O(1) space
+def threeNumberSort(array, order):
+    valueCounts = [0, 0, 0]
+
+    for element in array:
+        orderIdx = order.index(element)
+        valueCounts[orderIdx] += 1
+    
+    for i in range(3):
+        value = order[i]
+        count = valueCounts[i]
+
+        numElementsBefore = sum(valueCounts[:i])
+        for n in range(count):
+            currentIdx = numElementsBefore + n
+            array[currentIdx] = value
+    
+    return array
