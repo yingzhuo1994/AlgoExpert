@@ -11,9 +11,9 @@ class BST:
 def validateThreeNodes(nodeOne, nodeTwo, nodeThree):
     # Write your code here.
     if isDescendant(nodeOne, nodeTwo):
-		return isDescendant(nodeTwo, nodeThree)
+        return isDescendant(nodeTwo, nodeThree)
     elif isDescendant(nodeThree, nodeTwo):
-		return isDescendant(nodeTwo, nodeOne)
+        return isDescendant(nodeTwo, nodeOne)
     else:
         return False
 
@@ -32,9 +32,9 @@ def isDescendant(ancestor, descendant):
 def validateThreeNodes(nodeOne, nodeTwo, nodeThree):
     # Write your code here.
     if isDescendant(nodeOne, nodeTwo):
-		return isDescendant(nodeTwo, nodeThree)
+        return isDescendant(nodeTwo, nodeThree)
     elif isDescendant(nodeThree, nodeTwo):
-		return isDescendant(nodeTwo, nodeOne)
+        return isDescendant(nodeTwo, nodeOne)
     else:
         return False
 
