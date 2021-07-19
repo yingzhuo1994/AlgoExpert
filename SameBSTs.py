@@ -56,13 +56,13 @@ def areSameBsts(arrayOne, arrayTwo, rootIdxOne, rootIdxTwo, minVal, maxVal):
     
     return leftAreSame and rightAreSame
 
-def getIdxOfFirstSmaller(array, startingIdx):
+def getIdxOfFirstSmaller(array, startingIdx, minVal):
     for i in range(startingIdx + 1, len(array)):
         if array[i] < array[startingIdx] and array[i] >= minVal:
             return i
     return -1
 
-def getIdxOfFirstBiggerOrEqual(array, startingIdx), maxVal:
+def getIdxOfFirstBiggerOrEqual(array, startingIdx, maxVal):
     for i in range(startingIdx + 1, len(array)):
         if array[i] >= array[startingIdx] and array[i] < maxVal:
             return i
