@@ -5,13 +5,13 @@ def reverseWordsInString(string):
     startOfWord = 0
     for idx in range(len(string)):
         character = string[idx]
-
-		if character == ' ':
-			words.append(string[startOfWord:idx])
-			startOfWord = idx
-		elif string[startOfWord] == ' ':
-			words.append(' ')
-			startOfWord = idx
+        
+        if character == ' ':
+            words.append(string[startOfWord:idx])
+            startOfWord = idx
+        elif string[startOfWord] == ' ':
+            words.append(' ')
+            startOfWord = idx
         
 	words.append(string[startOfWord:])
 
