@@ -1,3 +1,4 @@
+# O(n) time | O(log(n)) space
 def maxPathSum(tree):
     _, maxSum = findMaxSum(tree)
     return maxSum
