@@ -6,6 +6,7 @@ class BinaryTree:
         self.right = right
 
 
+# O(n) time | O(n) space - where n is the number of nodes in the tree
 def findNodesDistanceK(tree, target, k):
     nodesToParents = {}
     populateNodesToParents(tree, nodesToParents)
