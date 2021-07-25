@@ -73,7 +73,7 @@ def validateThreeNodes(nodeOne, nodeTwo, nodeThree):
                 searchTwo = searchTwo.right
         
     foundNodeFromOther = searchOne is nodeThree or searchTwo is nodeOne
-    foundNodeTwo = searchOne is nodeTwo or searchTwo is nodeTwo
+    # foundNodeTwo = searchOne is nodeTwo or searchTwo is nodeTwo
     if not foundNodeTwo or foundNodeFromOther:
         return False
     
