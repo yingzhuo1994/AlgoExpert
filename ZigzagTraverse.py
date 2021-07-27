@@ -39,6 +39,7 @@ def zigzagTraverse(array):
             if col == 0 or row == height:
                 goingDown = False
                 # notice the stop condition sequnce
+                # pay attention to the left down corner
                 if row == height:
                     col += 1
                 else:
@@ -50,6 +51,7 @@ def zigzagTraverse(array):
             if row == 0 or col == width:
                 goingDown = True
                 # notice the stop condition sequnce
+                # pay attention to the right top corner
                 if col == width:
                     row += 1
                 else:
