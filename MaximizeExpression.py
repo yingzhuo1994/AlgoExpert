@@ -44,3 +44,38 @@ def maximizeExpression(array):
         maxOfAMinusBPlucCMinusD.append(currentMax)
 
     return maxOfAMinusBPlucCMinusD[-1]
+
+
+# 3rd solution, dynamic programming
+# O(n) time | O(n) space
+def maximizeExpression(array):
+    if len(array) < 4:
+        return 0
+    
+    n = len(array) - 3
+    lst = []
+
+    curMax = float("-inf")
+    for idx in range(n):
+        curMax = max(curMax, array[idx])
+        lst.append(curMax)
+    
+    curMax = float("-inf")
+    for idx in range(n):
+        b = idx + 1
+        curMax = max(curMax, lst[idx] - array[b])
+        lst[idx] = curMax
+
+    curMax = float("-inf")
+    for idx in range(n):
+        c = idx + 2
+        curMax = max(curMax, lst[idx] + array[c])
+        lst[idx] = curMax
+
+    curMax = float("-inf")  
+    for idx in range(n):
+        d = idx + 3
+        curMax = max(curMax, lst[idx] - array[d])
+        lst[idx] = curMax
+
+    return lst[-1]
