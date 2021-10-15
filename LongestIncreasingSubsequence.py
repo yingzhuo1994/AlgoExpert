@@ -1,0 +1,3 @@
+def longestIncreasingSubsequence(array):
+    
+
