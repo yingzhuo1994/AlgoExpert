@@ -1,5 +1,8 @@
 # 1st solution
 # O(nm * min(n, m)) time | O(nm * min(n, m)) space
+from typing import Sequence
+
+
 def longestCommonSubsequence(str1, str2):
     lcs = [[[] for x in range(len(str1) + 1)] for y in range(len(str2) + 1)]
     for i in range(1, len(str2) + 1):
@@ -56,4 +59,31 @@ def buildSequence(lcs):
             sequence.append(currentEntry[0])
         i = currentEntry[2]
         j = currentEntry[3]
+    return list(reversed(sequence))
+
+# 4th solution
+# O(nm) time | O(nm) space
+def longestCommonSubsequence(str1, str2):
+    dp = [[0 for x in range(len(str1) + 1)] for y in range(len(str2) + 1)]
+    for i in range(1, len(str2) + 1):
+        for j in range(1, len(str1) + 1):
+            if str2[i - 1] == str1[j - 1]:
+                dp[i][j] = dp[i - 1][j - 1] + 1
+            else:
+                dp[i][j] = max(dp[i - 1][j], dp[i][j - 1])
+    return buildSequence(dp, str1)
+
+def buildSequence(dp, string):
+    sequence = []
+    i = len(dp) - 1
+    j = len(dp[0]) - 1
+    while i != 0 and j != 0:
+        if dp[i][j] == dp[i - 1][j]:
+            i -= 1
+        elif dp[i][j] == dp[i][j - 1]:
+            j -= 1
+        else:
+            sequence.append(string[j - 1])
+            i -= 1
+            j -= 1
     return list(reversed(sequence))
