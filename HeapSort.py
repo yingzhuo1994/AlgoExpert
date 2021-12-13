@@ -1,3 +1,5 @@
+# 1st solution, max-heap
+# O(nlogn) time | O(1) space
 def heapSort(array):
     # Write your code here.
     buildHeap(array)
@@ -23,7 +25,4 @@ def heapify(array, idx, end):
 
 def buildHeap(array):
     for i in reversed(range(len(array) // 2)):
-        heapify(array, i, len(array))  
-
-
-    
+        heapify(array, i, len(array))
