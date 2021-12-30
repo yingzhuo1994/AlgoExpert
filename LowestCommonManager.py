@@ -22,6 +22,34 @@ def binarySearch(root, target, path = []):
             return newPath
     return None
 
+# 2nd solution
+# O(n) time | O(h) space
+def getLowestCommonManager(topManager, reportOne, reportTwo):
+    level = {topManager: [topManager]}
+    isOneFound = False
+    isTwoFound = False
+    while level:
+        if reportOne in level:
+            one = level[reportOne]
+            isOneFound = True
+        if reportTwo in level:
+            two = level[reportTwo]
+            isTwoFound = True
+        if isOneFound and isTwoFound:
+            break
+        newLevel = {}
+        for root in level:
+            for node in root.directReports:
+                newLevel[node] = level[root] + [node]
+        level = newLevel
+    idx = 0
+    while idx < min(len(one), len(two)):
+        if one[idx] == two[idx]:
+            idx += 1
+        else:
+            break
+    return one[idx - 1]
+
 # This is an input class. Do not edit.
 class OrgChart:
     def __init__(self, name):
