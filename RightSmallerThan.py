@@ -1,3 +1,4 @@
+# 1st solution
 def rightSmallerThan(array):
     ans = [0 for _ in array]
     arr = [[array[i], i] for i in range(len(array))]
