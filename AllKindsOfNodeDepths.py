@@ -20,7 +20,8 @@ def allKindsOfNodeDepths(root):
     return ans
 
 # 2nd solution
-# O(n) time | O(h) space
+# Average case: when the tree is balanced
+# O(n*log(n)) time | O(h) space
 def allKindsOfNodeDepths(root):
     sumOfAllDepths = 0
     stack = [root]
@@ -28,10 +29,23 @@ def allKindsOfNodeDepths(root):
         node = stack.pop()
         if node is None:
             continue
-        sumOfAllDepths += nodeDEpths(node)
+        sumOfAllDepths += nodeDepths(node)
         stack.append(node.left)
         stack.append(node.right)
     return sumOfAllDepths
+
+def nodeDepths(node, depth=0):
+    if node is None:
+        return 0
+    return depth + nodeDepths(node.left, depth + 1) + nodeDepths(node.right, depth + 1)
+
+# 3rd solution
+# Average case: when the tree is balanced
+# O(n*log(n)) time | O(h) space
+def allKindsOfNodeDepths(root):
+    if root is None:
+        return 0
+    return allKindsOfNodeDepths(root.left) + allKindsOfNodeDepths(root.right) + nodeDepths(root)
 
 def nodeDepths(node, depth=0):
     if node is None:
