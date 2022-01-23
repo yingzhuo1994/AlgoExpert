@@ -12,10 +12,11 @@ def allKindsOfNodeDepths(root):
     stack = [(root, 0)]
     while stack:
         node, depth = stack.pop()
-        if node is not None:
-            ans += (1 + depth) * depth // 2
-            stack.append((node.right, depth + 1))
-            stack.append((node.left, depth + 1))
+        if node is None:
+            continue
+        ans += (1 + depth) * depth // 2
+        stack.append((node.right, depth + 1))
+        stack.append((node.left, depth + 1))
     return ans
 
 # 2nd solution
