@@ -5,6 +5,8 @@ class BinaryTree:
         self.left = None
         self.right = None
 
+# 1st solution
+# O(n) time | O(h) space
 def allKindsOfNodeDepths(root):
     ans = 0
     stack = [(root, 0)]
@@ -12,6 +14,25 @@ def allKindsOfNodeDepths(root):
         node, depth = stack.pop()
         if node is not None:
             ans += (1 + depth) * depth // 2
-            stack.append((node.left, depth + 1))
             stack.append((node.right, depth + 1))
+            stack.append((node.left, depth + 1))
     return ans
+
+# 2nd solution
+# O(n) time | O(h) space
+def allKindsOfNodeDepths(root):
+    sumOfAllDepths = 0
+    stack = [root]
+    while len(stack) > 0:
+        node = stack.pop()
+        if node is None:
+            continue
+        sumOfAllDepths += nodeDEpths(node)
+        stack.append(node.left)
+        stack.append(node.right)
+    return sumOfAllDepths
+
+def nodeDepths(node, depth=0):
+    if node is None:
+        return 0
+    return depth + nodeDepths(node.left, depth + 1) + nodeDepths(node.right, depth + 1)
