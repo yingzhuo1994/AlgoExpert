@@ -84,3 +84,55 @@ def addNodeCounts(node, nodeCounts):
     if node.right is not None:
         addNodeCounts(node.right, nodeCounts)
         nodeCounts[node] += nodeCounts[node.right]
+
+# 5th solution
+# Average case: when the tree is balanced
+# O(n) time | O(h) space
+def allKindsOfNodeDepths(root):
+    return getTreeInfo(root).sumOfAllDepths
+
+def getTreeInfo(tree):
+    if tree is None:
+        return TreeInfo(0, 0, 0)
+    
+    leftTreeInfo = getTreeInfo(tree.left)
+    rightTreeInfo = getTreeInfo(tree.right)
+
+    sumOfLeftDepths = leftTreeInfo.sumOfDepths + leftTreeInfo.numNodesInTree
+    sumOfRightDepths = rightTreeInfo.sumOfDepths + rightTreeInfo.numNodesInTree
+
+    numNodesInTree = 1 + leftTreeInfo.numNodesInTree + rightTreeInfo.numNodesInTree
+    sumOfDepths = sumOfLeftDepths + sumOfRightDepths
+    sumOfAllDepths = sumOfDepths + leftTreeInfo.sumOfAllDepths + rightTreeInfo.sumOfAllDepths
+
+    return TreeInfo(numNodesInTree, sumOfDepths, sumOfAllDepths)
+
+class TreeInfo:
+    def __init__(self, numNodesInTree, sumOfDepths, sumOfAllDepths):
+        self.numNodesInTree = numNodesInTree
+        self.sumOfDepths = sumOfDepths
+        self.sumOfAllDepths = sumOfAllDepths
+
+# 6th solution
+# Average case: when the tree is balanced
+# O(n) time | O(h) space
+def allKindsOfNodeDepths(root, depthSum=0, depth=0):
+    if root is None:
+        return 0
+    
+    depthSum += depth
+    return (
+        depthSum \
+        + allKindsOfNodeDepths(root.left, depthSum, depth + 1) \
+        + allKindsOfNodeDepths(root.right, depthSum, depth + 1)
+    )
+
+# 7th solution
+# Average case: when the tree is balanced
+# O(n) time | O(h) space
+def allKindsOfNodeDepths(root, depth=0):
+    if root is None:
+        return 0
+    
+    depthSum = (depth * (depth + 1)) / 2
+    return depthSum + allKindsOfNodeDepths(root.left, depth + 1) + allKindsOfNodeDepths(root.right, depth + 1)
