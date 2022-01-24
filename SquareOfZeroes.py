@@ -149,3 +149,52 @@ def preComputeNumOfZeroes(matrix):
                 infoMatrix[row][col]["numZeroesRight"] += infoMatrix[row][col + 1]["numZeroesRight"]
     
     return infoMatrix
+
+# 5th solution
+# O(n^3) time | O(n^2) space
+# where n is the height and width of the matrix
+def squareOfZeroes(matrix):
+    infoMatrix = preComputeNumOfZeroes(matrix)
+    n = len(matrix)
+    for topRow in range(n):
+        for leftCol in range(n):
+            squareLength = 2
+            while squareLength <= n - leftCol and squareLength <= n - topRow:
+                bottomRow = topRow + squareLength - 1
+                rightCol = leftCol + squareLength - 1
+                if isSquareOfZeroes(infoMatrix, topRow, leftCol, bottomRow, rightCol):
+                    return True
+                squareLength += 1
+    return False
+
+def isSquareOfZeroes(infoMatrix, r1, c1, r2, c2):
+    squareLength = c2 - c1 + 1
+    hasTopBorder = infoMatrix[r1][c1]["numZeroesRight"] >= squareLength
+    hasLeftBorder = infoMatrix[r1][c1]["numZeroesBelow"] >= squareLength
+    hasBottomBorder = infoMatrix[r2][c1]["numZeroesRight"] >= squareLength
+    hasRightBorder = infoMatrix[r1][c2]["numZeroesBelow"] >= squareLength
+    return hasTopBorder and hasLeftBorder and hasBottomBorder and hasRightBorder
+
+def preComputeNumOfZeroes(matrix):
+    infoMatrix = [[x for x in row] for row in matrix]
+
+    n = len(matrix)
+    for row in range(n):
+        for col in range(n):
+            numZeroes = 1 if matrix[row][col] == 0 else 0
+            infoMatrix[row][col] = {
+                "numZeroesBelow": numZeroes,
+                "numZeroesRight": numZeroes,
+            }
+    
+    lastIdx = len(matrix) - 1
+    for row in reversed(range(n)):
+        for col in reversed(range(n)):
+            if matrix[row][col] == 1:
+                continue
+            if row < lastIdx:
+                infoMatrix[row][col]["numZeroesBelow"] += infoMatrix[row + 1][col]["numZeroesBelow"]
+            if col < lastIdx:
+                infoMatrix[row][col]["numZeroesRight"] += infoMatrix[row][col + 1]["numZeroesRight"]
+    
+    return infoMatrix
