@@ -8,7 +8,7 @@ class LinkedList:
 # O(n) time | O(1) space
 def nodeSwap(head):
     newHead = head
-    printLinkedList(head)
+    # printLinkedList(head)
     if head.next is not None:
         newHead = head.next
     prev = None
@@ -22,7 +22,7 @@ def nodeSwap(head):
             prev.next = second
         prev = first
         head = nextNode
-    printLinkedList(newHead)
+    # printLinkedList(newHead)
     return newHead
     
 def printLinkedList(head):
@@ -31,3 +31,34 @@ def printLinkedList(head):
         stack.append(head.value)
         head = head.next
     print(stack)
+
+# 2nd solution
+# O(n) time | O(n) space
+def nodeSwap(head):
+    if head is None or head.next is None:
+        return head
+    nextNode = head.next
+    head.next = nodeSwap(head.next.next)
+    nextNode.next = head
+    return nextNode
+
+# 3rd solution
+# O(n) time | O(1) space
+def nodeSwap(head):
+    tempNode = LinkedList(0)
+    tempNode.next = head
+
+    prevNode = tempNode
+    while prevNode.next is not None and prevNode.next.next is not None:
+        firstNode = prevNode.next
+        secondNode = prevNode.next.next
+        # prevNode -> firstNode -> secondNode -> x
+
+        firstNode.next = secondNode.next
+        secondNode.next = firstNode
+        prevNode.next = secondNode
+        # prevNode -> secondNode -> firstNode -> x
+
+        prevNode = firstNode
+    
+    return tempNode.next
