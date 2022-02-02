@@ -1,6 +1,6 @@
+# 1st solution
 def longestPeak(array):
-    # 1st solution
-    if len(array) < 3:
+	if len(array) < 3:
 		return 0
 	longest = 0
 	i = 1
