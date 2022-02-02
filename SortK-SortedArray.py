@@ -1,5 +1,8 @@
 import heapq
 # 1st solution
+# O(n*log(k)) time | O(k) space
+# where n is the nubmer of elements in the array
+# and k is how far away elements are from their sorted position
 def sortKSortedArray(array, k):
     if k > len(array):
         array.sort()
