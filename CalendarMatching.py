@@ -1,8 +1,5 @@
 # 1st solution
 # O(n) time | O(n) space
-from abc import update_abstractmethods
-
-
 def calendarMatching(calendar1, dailyBounds1, calendar2, dailyBounds2, meetingDuration):
     possibleOne = getAvaiableTime(calendar1, dailyBounds1)
     possibleTwo = getAvaiableTime(calendar2, dailyBounds2)
@@ -63,7 +60,8 @@ def minutesToTime(minutes):
     return hour + ":" + minute
 
 # 2nd solution
-# O(n) time | O(n) space
+# O(c1 + c2) time | O(c1 + c2) space
+# where c1 and c2 are the respective numbers of meetings in calendar1 and calendar2 
 def calendarMatching(calendar1, dailyBounds1, calendar2, dailyBounds2, meetingDuration):
     updatedCalendar1 = updateCalendar(calendar1, dailyBounds1)
     updatedCalendar2 = updateCalendar(calendar2, dailyBounds2)
