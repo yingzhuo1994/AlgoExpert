@@ -59,6 +59,8 @@ class TrieNode:
 
 # 2nd solution
 # O(nm*8^s + ws) time | O(nm + ws) space
+# where n, m is the width and height of the board separately,
+# w is the length of the words, and s is length of the longest word in words.
 def boggleBoard(board, words):
 	trie = Trie()
 	for word in words:
