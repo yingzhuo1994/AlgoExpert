@@ -1,27 +1,29 @@
+# 1st solution
+# O(n) time | O(n) space
 def firstDuplicateValue(array):
-    # 1st solution
-    # O(n) time | O(n) space
-    # dic = {}
-    # for elem in array:
-    #     if elem in dic:
-    #         return elem
-    #     else:
-    #         dic[elem] = 1
-    # return -1
+    dic = {}
+    for elem in array:
+        if elem in dic:
+            return elem
+        else:
+            dic[elem] = 1
+    return -1
 
-    # 2nd solution
-    # O(n) time | O(n) space
+# 2nd solution
+# O(n) time | O(n) space
+def firstDuplicateValue(array):
     for i in range(len(array)):
         if array[i] in array[:i]:
             return array[i]
     return -1
 
-    # 3rd solution
-    # O(n) time | O(1) space
+# 3rd solution
+# O(n) time | O(1) space
+def firstDuplicateValue(array):
     for i in range(len(array)):
-        index = abs(array[i]) - 1
+        num = abs(array[i])
+        index = num - 1
         if array[index] < 0:
-            return abs(array[i])
-        else:
-            array[index] *= -1
+            return num
+        array[index] *= -1
     return -1
