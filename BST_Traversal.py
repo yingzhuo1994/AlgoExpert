@@ -1,5 +1,5 @@
+# O(n) time | O(n) space
 def inOrderTraverse(tree, array):
-    # Write your code here.
     if not tree:
         return
     inOrderTraverse(tree.left, array)
@@ -7,9 +7,8 @@ def inOrderTraverse(tree, array):
     inOrderTraverse(tree.right, array)
     return array
 
-
+# O(n) time | O(n) space
 def preOrderTraverse(tree, array):
-    # Write your code here.
     if not tree:
         return
     array.append(tree.value)
@@ -17,9 +16,8 @@ def preOrderTraverse(tree, array):
     preOrderTraverse(tree.right, array)
     return array
 
-
+# O(n) time | O(n) space
 def postOrderTraverse(tree, array):
-    # Write your code here.
     if not tree:
         return
     postOrderTraverse(tree.left, array)
