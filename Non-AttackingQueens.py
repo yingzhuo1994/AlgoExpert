@@ -105,7 +105,7 @@ def placeQueen(row, col, blockedColumns, blockedUpDiagonals, blockedDownDiagonal
     blockedUpDiagonals.add(row + col)
     blockedDownDiagonals.add(row - col)
 
-def removeQueen(row, col, blockedColumns, blockedUpDidagonals, blockedDownDiagonals):
+def removeQueen(row, col, blockedColumns, blockedUpDiagonals, blockedDownDiagonals):
     blockedColumns.remove(col)
-    blockedUpDidagonals.remove(row + col)
+    blockedUpDiagonals.remove(row + col)
     blockedDownDiagonals.remove(row - col)
