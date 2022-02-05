@@ -1,4 +1,5 @@
 # O（a * (a + r) + a + r + a*log(a)) time | O(a + r) space
+# where a is aiport number and r is route number.
 def airportConnections(airports, routes, startingAirport):
     airportGraph = createAirportGraph(airports, routes)
     unreachableAirportNodes = getUnreachableAirportNodes(airportGraph, airports, startingAirport)
