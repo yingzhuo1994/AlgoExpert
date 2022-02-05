@@ -273,6 +273,37 @@ class BST:
                     parentNode.right = currentNode.left if currentNode.left is not None else currentNode.right
                 break
         return self
+    
+    # simplified
+    # def remove(self, value, parentNode=None):
+    #     currentNode = self
+    #     while currentNode is not None:
+    #         if value < currentNode.value:
+    #             parentNode = currentNode
+    #             currentNode = currentNode.left
+    #         elif value > currentNode.value:
+    #             parentNode = currentNode
+    #             currentNode = currentNode.right
+    #         else:
+    #             if currentNode.right is not None:
+    #                 minValue = currentNode.right.getMinValue()
+    #                 currentNode.value = minValue
+    #                 currentNode.right.remove(minValue, currentNode)
+    #             elif parentNode is None:
+    #                 if currentNode.left is not None:
+    #                     minValue = currentNode.left.value
+    #                     currentNode.value = minValue
+    #                     currentNode.left.remove(minValue, currentNode)
+    #                 else:
+    #                     break
+    #             else:
+    #                 if parentNode.left == currentNode:
+    #                     parentNode.left = currentNode.left
+    #                 else:
+    #                     parentNode.right = currentNode.left
+    #             break
+        
+    #     return self
 
     def getMinValue(self):
         currentNode = self
