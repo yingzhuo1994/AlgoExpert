@@ -9,38 +9,43 @@ class BST:
 # O(n^2) time | O(n) space - where n is the length of the input array
 def reconstructBst(preOrderTraversalValues):
     # Write your code here.
-    lst = preOrderTraversalValues
-    n = len(lst)
+    n = len(preOrderTraversalValues)
     if n == 0:
         return None
-    tree = BST(lst[0])
-    k = 1
-    while k < n:
-        if lst[k] >= lst[0]:
+    
+    currentValue = preOrderTraversalValues[0]
+    rightSubtreeRootIdx = n
+
+    for idx in range(1, n):
+        value = preOrderTraversalValues[idx]
+        if value >= currentValue:
+            rightSubtreeRootIdx = idx
             break
-        k += 1
-    tree.left = reconstructBst(lst[1:k])
-    tree.right = reconstructBst(lst[k:])
-    return tree
+    
+    leftSubtree = reconstructBst(preOrderTraversalValues[1:rightSubtreeRootIdx])
+    rightSubtree = reconstructBst(preOrderTraversalValues[rightSubtreeRootIdx:])
+    return BST(currentValue, leftSubtree, rightSubtree)
 
 # 2nd solution
-class TreeInfo:
-    def __init__(self, rootIdx):
-        self.rootIdx = rootIdx
-
+# O(n) time | O(n) space
+# where n is the length of the input array
 def reconstructBst(preOrderTraversalValues):
     treeInfo = TreeInfo(0)
     return reconstructBstFromRange(float('-inf'), float('inf'), preOrderTraversalValues, treeInfo)
 
-def reconstructBstFromRange(lowerBound, upperBound, lst, curSubtreeInfo):
-    if curSubtreeInfo.rootIdx == len(lst):
+def reconstructBstFromRange(lowerBound, upperBound, preOrderTraversalValues, curSubtreeInfo):
+    if curSubtreeInfo.rootIdx == len(preOrderTraversalValues):
         return None
 
-    rootValue = lst[curSubtreeInfo.rootIdx]
+    rootValue = preOrderTraversalValues[curSubtreeInfo.rootIdx]
     if rootValue < lowerBound or rootValue >= upperBound:
         return None
 
     curSubtreeInfo.rootIdx += 1
-    leftSubtree = reconstructBstFromRange(lowerBound, rootValue, lst, curSubtreeInfo)
-    rightSubtree = reconstructBstFromRange(rootValue, upperBound, lst, curSubtreeInfo)
+    leftSubtree = reconstructBstFromRange(lowerBound, rootValue, preOrderTraversalValues, curSubtreeInfo)
+    rightSubtree = reconstructBstFromRange(rootValue, upperBound, preOrderTraversalValues, curSubtreeInfo)
     return BST(rootValue, leftSubtree, rightSubtree)
+
+class TreeInfo:
+    def __init__(self, rootIdx):
+        self.rootIdx = rootIdx
