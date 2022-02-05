@@ -5,53 +5,41 @@ class BST:
         self.left = left
         self.right = right
 
-
-# def findKthLargestValueInBst(tree, k):
-#     # Write your code here.
-#     dic = getAllValues(tree, [])
-#     return dic[-k]
-#
-# def getAllValues(tree, dic = []):
-#     if not tree:
-#         return dic
-#     if not dic:
-#         dic.append(tree.value)
-#     else:
-#         if tree.value >= dic[-1]:
-#             dic.append(tree.value)
-#         else:
-#             for i in range(len(dic)):
-#                 if tree.value < dic[i]:
-#                     dic.insert(i, tree.value)
-#                     break
-#     getAllValues(tree.left, dic)
-#     getAllValues(tree.right, dic)
-#     return dic
-
-# def findKthLargestValueInBst(tree, k):
-    # def helper(t):
-    #     if not t:
-    #         return []
-    #     dic = [t.value]
-    #     left = helper(t.left)
-    #     right = helper(t.right)
-    #     dic = left + dic + right
-    #     return dic
-    # dic = helper(tree)
-    # return dic[-k]
-
-
+# 1st solution
+# O(n) time | O(n) space
+# where n is the number of nodes in the tree
 def findKthLargestValueInBst(tree, k):
-    # Write your code here.
-    def helper(t, dic = [0, -1]):
-        if not t or dic[0] >= k:
-            return
-        helper(t.right, dic)
-        if dic[0] < k:
-            dic[0] += 1
-            dic[1] = t.value
-            helper(t.left, dic)
-        return dic
-    dic = helper(tree)
-	print(dic)
-    return dic[-1]
+    sortedNodeValues = []
+    inOrderTraverse(tree, sortedNodeValues)
+    return sortedNodeValues[-k]
+
+def inOrderTraverse(node, sortedNodeValues):
+    if node is None:
+        return
+    
+    inOrderTraverse(node.left, sortedNodeValues)
+    sortedNodeValues.append(node.value)
+    inOrderTraverse(node.right, sortedNodeValues)
+
+# 2nd solution
+# O(h + k) time | O(h) space
+# where h is the height of the tree and k is the input parameter
+def findKthLargestValueInBst(tree, k):
+    treeInfo = TreeInfo(0, -1)
+    reverseInOrderTraverse(tree, k, treeInfo)
+    return treeInfo.latestVisitedNodeValue
+
+def reverseInOrderTraverse(node, k, treeInfo):
+    if node is None or treeInfo.numberOfNodesVisited >= k:
+        return
+    
+    reverseInOrderTraverse(node.right, k, treeInfo)
+    if treeInfo.numberOfNodesVisited < k:
+        treeInfo.numberOfNodesVisited += 1
+        treeInfo.latestVisitedNodeValue = node.value
+        reverseInOrderTraverse(node.left, k, treeInfo)
+
+class TreeInfo:
+    def __init__(self, numberOfNodesVisited, latestVisitedNodeValue):
+        self.numberOfNodesVisited = numberOfNodesVisited
+        self.latestVisitedNodeValue = latestVisitedNodeValue
