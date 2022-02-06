@@ -1,34 +1,26 @@
 # 1st solution
+# O(bns) time | O(n) space
 def multiStringSearch(bigString, smallStrings):
-    stack = bigString.split()
-    trie = Trie()
-    for word in stack:
-        trie.repeatAdd(word)
-    ans = []
-    for word in smallStrings:
-        ans.append(trie.isContained(word))
-    return ans
+    return [isInBigString(bigString, smallString) for smallString in smallStrings]
 
-class Trie:
-    def __init__(self):
-        self.dic = {}
-    
-    def repeatAdd(self, word):
-        for i in range(len(word)):
-            self.add(word, i)
+def isInBigString(bigString, smallString):
+    for i in range(len(bigString)):
+        if i + len(smallString) > len(bigString):
+            break
+        if isInBigStringHelper(bigString, smallString, i):
+            return True
+    return False
 
-    def add(self, word, idx):
-        dic = self.dic
-        for i in range(idx, len(word)):
-            ch = word[i]
-            if ch not in dic:
-                dic[ch] = {}
-            dic = dic.get(ch, {})
-    
-    def isContained(self, word):
-        dic = self.dic
-        for ch in word:
-            if ch not in dic:
-                return False
-            dic = dic[ch]
-        return True
+def isInBigStringHelper(bigString, smallString, startIdx):
+    leftBigIdx = startIdx
+    rightBigIdx = startIdx + len(smallString) - 1
+    leftSmallIdx = 0
+    rightSmallIdx = len(smallString) - 1
+    while leftBigIdx <= rightBigIdx:
+        if bigString[leftBigIdx] != smallString[leftSmallIdx] or bigString[rightBigIdx] != smallString[rightSmallIdx]:
+            return False
+        leftBigIdx += 1
+        rightBigIdx -= 1
+        leftSmallIdx += 1
+        rightSmallIdx -= 1
+    return True
