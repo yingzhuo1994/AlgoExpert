@@ -1,8 +1,5 @@
 # 1st solution
 # O(nm * min(n, m)) time | O(nm * min(n, m)) space
-from typing import Sequence
-
-
 def longestCommonSubsequence(str1, str2):
     lcs = [[[] for x in range(len(str1) + 1)] for y in range(len(str2) + 1)]
     for i in range(1, len(str2) + 1):
