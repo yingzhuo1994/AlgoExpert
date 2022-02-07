@@ -6,40 +6,44 @@ class BinaryTree:
         self.right = right
 
 # 1st solution
+# O(n) time | O(h) space
+# where n is the number of nodes in the binary tree
 def heightBalancedBinaryTree(tree):
-    # Write your code here.
-    if not tree:
-        return True
-    if tree.left is None and tree.right is None:
-        return True
-    leftHeight = getHeight(tree.left)
-    rightHeight = getHeight(tree.right)
-    if abs(leftHeight - rightHeight) > 1:
-        return False
-    return heightBalancedBinaryTree(tree.left) and heightBalancedBinaryTree(tree.right)
+    height, isBalanced = getHeightOfTree(tree)
+    return isBalanced
 
-def getHeight(tree):
-    if not tree:
-        return 0
-    return 1 + max(getHeight(tree.left), getHeight(tree.right))
+def getHeightOfTree(node):
+    if not node:
+        return (0, True)
+    leftHeight, isLeftBalanced = getHeightOfTree(node.left)
+    rightHeight, isRightBalanced = getHeightOfTree(node.right)
+    height = 1 + max(leftHeight, rightHeight)
+    isBalanced = isLeftBalanced and isRightBalanced and abs(leftHeight - rightHeight) <= 1
+    return (height, isBalanced)
 
 # 2nd solution
-class treeInfo:
+# O(n) time | O(h) space
+# where n is the number of nodes in the binary tree
+class TreeInfo:
     def __init__(self, isBalanced, height):
         self.isBalanced = isBalanced
         self.height = height
 
 def heightBalancedBinaryTree(tree):
-    # Write your code here.
-    return getTreeInfo(tree).isBalanced
+    treeInfo = getTreeInfo(tree)
+    return treeInfo.isBalanced
 
 def getTreeInfo(node):
-    if not node:
-        return treeInfo(True, -1)
+    if node is None:
+        return TreeInfo(True, -1)
 
     leftSubTreeInfo = getTreeInfo(node.left)
     rightSubTreeInfo = getTreeInfo(node.right)
-    isBalanced = leftSubTreeInfo.isBalanced and rightSubTreeInfo.isBalanced and (
-                    abs(leftSubTreeInfo.height - rightSubTreeInfo.height) <= 1)
+
+    isBalanced = (
+        leftSubTreeInfo.isBalanced 
+        and rightSubTreeInfo.isBalanced 
+        and abs(leftSubTreeInfo.height - rightSubTreeInfo.height) <= 1
+    )
     height = 1 + max(leftSubTreeInfo.height, rightSubTreeInfo.height)
-    return treeInfo(isBalanced, height)
+    return TreeInfo(isBalanced, height)
