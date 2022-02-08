@@ -13,7 +13,7 @@ def maxSumIncreasingSubsequence(array):
         if maxBeforeIndex != -1 and maxBeforeValue > 0:
             table[i][0] = maxBeforeIndex
             table[i][1] += maxBeforeValue
-	print(table)
+    print(table)
     nextIdx, maxSum = max(table, key = lambda lst: lst[1])
 
     start = table.index([nextIdx, maxSum])
