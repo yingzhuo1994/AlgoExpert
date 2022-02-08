@@ -1,12 +1,11 @@
-def productSum(array):
-    # Write your code here.
-
-    def helper(array, depth = 1):
-        result = 0
-        for elem in array:
-            if isinstance(elem, int):
-                result += elem
-            else:
-                result += helper(elem, depth + 1)
-        return depth * result
-    return helper(array, 1)
+# O(n) time | O(d) space
+# where n is the total number of elements in the array,
+# including sub-subelements, and d is the greatest depth of "special" arrays in the array
+def productSum(array, multiplier=1):
+    ans = 0
+    for element in array:
+        if type(element) is list:
+            ans += productSum(element, multiplier + 1)
+        else:
+            ans += element
+    return ans * multiplier
