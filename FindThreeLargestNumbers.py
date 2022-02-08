@@ -1,5 +1,4 @@
 def findThreeLargestNumbers(array):
-    # Write your code here.
     lst = []
     for num in array:
         insertNum(lst, num)
@@ -23,14 +22,15 @@ def findThreeLargestNumbers(array):
 
 # 2nd generalized solution
 def insertNum(lst, num):
-	# this could be use for N largest number
-	N = 3
+    # this could be use for N largest number
+    N = 3
     if len(lst) == 0 or num > lst[-1]:
         lst.append(num)
-	else:
-		for i in range(len(lst)):
-			if num <= lst[i]:
-				lst.insert(i, num)
-				break
+    else:
+        # should use binary search and deque
+        for i in range(len(lst)):
+            if num <= lst[i]:
+                lst.insert(i, num)
+                break
     if len(lst) > N:
         lst.pop(0)
