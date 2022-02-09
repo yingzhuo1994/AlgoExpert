@@ -1,9 +1,5 @@
-from typing import Counter
-
-
+# 1st recursive solution
 def levenshteinDistance(str1, str2):
-    # Write your code here.
-    # 1st recursive solution
     if str1 == str2:
         return 0
     if len(str1) == 0:
@@ -18,27 +14,37 @@ def levenshteinDistance(str1, str2):
     print(insertOpt, deletionOpt, substitutionOpt)
     return min(insertOpt, deletionOpt, substitutionOpt)
 
-    # 2nd dynamic solution
-    table = [[j for j in range(len(str2) + 1)] for i in range(len(str1) + 1)]
+# 2nd dynamic solution
+# O(nm) time | O(nm) space
+def levenshteinDistance(str1, str2):
+    edits = [[j for j in range(len(str2) + 1)] for i in range(len(str1) + 1)]
     for i in range(1, len(str1) + 1):
-        table[i][0] = i
+        edits[i][0] = i
         for j in range(1, len(str2) + 1):
-            cur = min(table[i-1][j], table[i][j-1], table[i-1][j-1])
             if str1[i-1] == str2[j-1]:
-                table[i][j] = table[i - 1][j - 1]
+                edits[i][j] = edits[i - 1][j - 1]
             else:
-                table[i][j] = cur + 1
-    return table[-1][-1]
+                edits[i][j] = min(edits[i-1][j], edits[i][j-1], edits[i-1][j-1]) + 1
+    return edits[-1][-1]
 
-    # 3rd solution
-    cur = [j for j in range(len(str2) + 1)]
-    for i in range(1, len(str1) + 1):
-		last = cur
-		cur = [i for j in range(len(str2) + 1)]
-		for j in range(1, len(str2) + 1):
-			if str1[i - 1] == str2[j - 1]:
-				cur[j] = last[j - 1]
-			else:
-				cur[j] = 1 + min(cur[j - 1], last[j - 1], last[j])
-	return cur[-1]
-
+# 3rd solution
+# O(nm) time | O(min(n, m)) space
+def levenshteinDistance(str1, str2):
+    small = str1 if len(str1) < len(str2) else str2
+    big = str1 if len(str1) >= len(str2) else str2
+    evenEdits = [x for x in range(len(small) + 1)]
+    oddEdits = [None for x in range(len(small) + 1)]
+    for i in range(1, len(big) + 1):
+        if i % 2 == 1:
+            currentEdits = oddEdits
+            previousEdits = evenEdits
+        else:
+            currentEdits = evenEdits
+            previousEdits = oddEdits
+        currentEdits[0] = i
+        for j in range(1, len(small) + 1):
+            if big[i - 1] == small[j - 1]:
+                currentEdits[j] = previousEdits[j - 1]
+            else:
+                currentEdits[j] = 1 + min(previousEdits[j - 1], previousEdits[j], currentEdits[j - 1])
+    return evenEdits[-1] if len(big) % 2 == 0 else oddEdits[-1]
