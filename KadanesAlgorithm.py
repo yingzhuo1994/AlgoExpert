@@ -1,5 +1,6 @@
+# O(n) time | O(1) space
+# where n is the length of the input array
 def kadanesAlgorithm(array):
-    # Write your code here.
     maxEndingHere = array[0]
     maxSoFar = array[0]
     for i in range(1, len(array)):
