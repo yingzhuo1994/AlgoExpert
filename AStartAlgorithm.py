@@ -4,8 +4,8 @@ class Node:
         self.row = row
         self.col = col
         self.value = value
-        self.distanceFromStart = float("inf")
-        self.estimatedDistanceToEnd = float("inf")
+        self.distanceFromStart = float("inf") # g
+        self.estimatedDistanceToEnd = float("inf") # f
         self.cameFrom = None
 
 # O(w * h * log(w * h)) time | O(w * h) space
