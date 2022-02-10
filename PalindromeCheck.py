@@ -1,5 +1,5 @@
+# O(n) time | O(1) space
 def isPalindrome(string):
-    # Write your code here.
     leftPointer = 0
     rightPointer = len(string) - 1
     while leftPointer <= rightPointer:
