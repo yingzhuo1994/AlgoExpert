@@ -5,7 +5,7 @@ class Node:
         self.col = col
         self.value = value
         self.distanceFromStart = float("inf") # g
-        self.estimatedDistanceToEnd = float("inf") # f
+        self.estimatedDistanceToEnd = float("inf") # f = g + h
         self.cameFrom = None
 
 # O(w * h * log(w * h)) time | O(w * h) space
