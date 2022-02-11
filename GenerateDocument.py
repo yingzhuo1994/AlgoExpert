@@ -1,5 +1,7 @@
+# O(n + m) time | O(c) space
+# where n is the number of characters, m is the length of the document
+# and c is the number of unique characters in the characters string
 def generateDocument(characters, document):
-    # Write your code here.
     dic = getDic(characters)
     for elem in document:
         if elem in dic and dic[elem] > 0:
