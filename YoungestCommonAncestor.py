@@ -4,11 +4,9 @@ class AncestralTree:
         self.name = name
         self.ancestor = None
 
-
+# 1st solution
+# O(d) time | O(d) space
 def getYoungestCommonAncestor(topAncestor, descendantOne, descendantTwo):
-    # Write your code here.
-    # 1st solution
-    # O(d) time | O(d) space
     one = descendantOne
     two = descendantTwo
     ancestorOfOne = []
@@ -21,8 +19,9 @@ def getYoungestCommonAncestor(topAncestor, descendantOne, descendantTwo):
         two = two.ancestor
 	return None
     
-    # 2nd solution
-    # O(d) time | O(1) space
+# 2nd solution
+# O(d) time | O(1) space
+def getYoungestCommonAncestor(topAncestor, descendantOne, descendantTwo)
     depthOne = getDepth(descendantOne, topAncestor)
     depthTwo = getDepth(descendantTwo, topAncestor)
     if depthOne >= depthTwo:
