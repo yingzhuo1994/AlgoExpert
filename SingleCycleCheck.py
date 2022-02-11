@@ -1,30 +1,26 @@
+# 1st solution
+# O(n) time | O(n) space
 def hasSingleCycle(array):
-    # Write your code here.
-    # 1st solution
-    # O(n) time | O(n) space
-    lst = []
+    visited = []
     i = 0
-    while i not in lst:
-        lst.append(i)
-        i = getIndex(array, i)
-    return len(lst) == len(array) and  getIndex(array, lst[-1]) == lst[0]
+    while i not in visited:
+        visited.append(i)
+        i = getNextIdx(array, i)
+    return len(visited) == len(array) and  i == 0
 
-    # 2nd solution
-    # O(n) time | O(1) space
-    numElemVisited = 0
-    i = 0
-    while numElemVisited < len(array):
-        if numElemVisited > 0 and i == 0:
+# 2nd solution
+# O(n) time | O(1) space
+def hasSingleCycle(array):
+    numElementsVisited = 0
+    currentIdx = 0
+    while numElementsVisited < len(array):
+        if numElementsVisited > 0 and currentIdx == 0:
             return False
-        numElemVisited += 1
-        i = getIndex(array, i)
-    return i == 0   
+        numElementsVisited += 1
+        currentIdx = getNextIdx(array, currentIdx)
+    return currentIdx == 0   
 
-def getIndex(array, k):
-    index = k + array[k]
-    if 0 <= index <= len(array) - 1:
-        return index
-    else:
-        return index % len(array)
-    
-
+def getNextIdx(array, currentIdx):
+    jump = array[currentIdx]
+    nextIdx = (currentIdx + jump) % len(array)
+    return nextIdx if nextIdx >= 0 else nextIdx + len(array)
