@@ -289,18 +289,16 @@ class BST:
     #                 minValue = currentNode.right.getMinValue()
     #                 currentNode.value = minValue
     #                 currentNode.right.remove(minValue, currentNode)
-    #             elif parentNode is None:
-    #                 if currentNode.left is not None:
-    #                     minValue = currentNode.left.value
-    #                     currentNode.value = minValue
-    #                     currentNode.left.remove(minValue, currentNode)
-    #                 else:
-    #                     break
+    #             elif currentNode.left is not None:
+    #                 leftValue = currentNode.left.value
+    #                 currentNode.value = leftValue
+    #                 currentNode.left.remove(leftValue, currentNode)
     #             else:
-    #                 if parentNode.left == currentNode:
-    #                     parentNode.left = currentNode.left
-    #                 else:
-    #                     parentNode.right = currentNode.left
+    #                 if parentNode is not None:
+    #                     if parentNode.left == currentNode:
+    #                         parentNode.left = currentNode.left
+    #                     else:
+    #                         parentNode.right = currentNode.left
     #             break
         
     #     return self
