@@ -57,12 +57,12 @@ def getTaskDurationsToIndices(tasks):
 # O(nlogn) time | O(n) space - where n is the number of tasks
 def taskAssignment(k, tasks):
     dic = {}
-	for i, num in enumerate(tasks):
-		dic[num] = dic.get(num, []) + [i]
-	lst  = sorted(tasks)
-	result = []
-	for i in range(len(lst) // 2):
-		first = dic[lst[i]].pop()
-		second = dic[lst[len(lst) - 1 - i]].pop()
-		result.append([first, second])
-	return result
+    for i, num in enumerate(tasks):
+        dic[num] = dic.get(num, []) + [i]
+    lst  = sorted(tasks)
+    result = []
+    for i in range(len(lst) // 2):
+        first = dic[lst[i]].pop()
+        second = dic[lst[len(lst) - 1 - i]].pop()
+        result.append([first, second])
+    return result
