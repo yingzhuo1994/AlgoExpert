@@ -14,7 +14,7 @@ def removeKthNodeFromEnd(head, k):
         second = second.next
         counter += 1
     
-    if not second:
+    if second is None:
         head.value = head.next.value
         head.next = head.next.next
         return 
