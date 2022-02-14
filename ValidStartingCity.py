@@ -1,18 +1,24 @@
 # 1st solution
 # O(n^2) time | O(1) space
 def validStartingCity(distances, fuel, mpg):
-    n = len(fuel)
-    for i in range(n):
-        miles = fuel[i] * mpg
-        j = i
-        while True:
-            if miles < distances[j]:
-                break
-            miles -= distances[j]
-            j  = (j + 1) % n
-            miles += fuel[j] * mpg
-            if j == i:
-                return i
+    numberOfCities = len(fuel)
+    for startCityIdx in range(numberOfCities):
+        milesRemaining = 0
+
+        for currentCityIdx in range(startCityIdx, startCityIdx + numberOfCities):
+            if milesRemaining < 0:
+                continue
+
+            currentCityIdx = currentCityIdx % numberOfCities
+
+            fuelFromCurrentCity = fuel[currentCityIdx]
+            distanceToNextCity = distances[currentCityIdx]
+            milesRemaining += fuelFromCurrentCity * mpg - distanceToNextCity
+        
+        if milesRemaining >= 0:
+            return startCityIdx
+    
+    return -1
 
 # 2nd solution
 # O(n) time | O(1) space
@@ -20,14 +26,19 @@ def validStartingCity(distances, fuel, mpg):
     if sum(fuel) * mpg - sum(distances) < 0:
         return -1
     
-    miles, start_index = 0, 0
-    
-    for i in range(len(fuel)):
-        miles += fuel[i] * mpg - distances[i]
+    numberOfCities = len(distances)
+    milesRemaining = 0
+
+    indexOfStartingCityCandidate = 0
+    milesRemainingAtStartingCityCandidate = 0
+
+    for cityIdx in range(1, numberOfCities):
+        distanceFromPreviousCity = distances[cityIdx - 1]
+        fuelFromPreviousCity = fuel[cityIdx - 1]
+        milesRemaining += fuelFromPreviousCity * mpg - distanceFromPreviousCity
+
+        if milesRemaining < milesRemainingAtStartingCityCandidate:
+            milesRemainingAtStartingCityCandidate = milesRemaining
+            indexOfStartingCityCandidate = cityIdx
         
-        if miles < 0:
-            start_index = i + 1
-            miles = 0
-        
-    return start_index
-    
+    return indexOfStartingCityCandidate
