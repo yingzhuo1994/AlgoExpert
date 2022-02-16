@@ -33,4 +33,3 @@ def countingSort(array, digit):
     
     for idx in range(len(array)):
         array[idx] = sortedArray[idx]
-    
