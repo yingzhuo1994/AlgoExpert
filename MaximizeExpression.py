@@ -25,7 +25,7 @@ def maximizeExpression(array):
     maxOfA = [array[0]]
     maxOfAMinusB = [float("-inf")]
     maxOfAMinusBPlusC = [float("-inf")] * 2
-    maxOfAMinusBPlucCMinusD = [float("-inf")] * 3
+    maxOfAMinusBPlusCMinusD = [float("-inf")] * 3
 
     for idx in range(1, n):
         currentMax = max(maxOfA[idx - 1], array[idx])
@@ -40,10 +40,10 @@ def maximizeExpression(array):
         maxOfAMinusBPlusC.append(currentMax)
     
     for idx in range(3, n):
-        currentMax = max(maxOfAMinusBPlucCMinusD[idx - 1], maxOfAMinusBPlusC[idx - 1] - array[idx])
-        maxOfAMinusBPlucCMinusD.append(currentMax)
+        currentMax = max(maxOfAMinusBPlusCMinusD[idx - 1], maxOfAMinusBPlusC[idx - 1] - array[idx])
+        maxOfAMinusBPlusCMinusD.append(currentMax)
 
-    return maxOfAMinusBPlucCMinusD[-1]
+    return maxOfAMinusBPlusCMinusD[-1]
 
 
 # 3rd solution, dynamic programming
