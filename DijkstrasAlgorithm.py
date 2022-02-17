@@ -134,3 +134,25 @@ class MinHeap:
     def update(self, vertex, value):
         self.heap[self.vertexMap[vertex]] = (vertex, value)
         self.siftUp(self.vertexMap[vertex], self.heap)
+
+# 3rd solution
+# O((v + e) * log(v)) time | O(v) space - where v is the number
+# of vertices and e is the number of edges in the input graph
+from heapq import heapify, heappush, heappop
+def dijkstrasAlgorithm(start, edges):
+	minDistances = [float("inf") for _ in range(len(edges))]
+	minDistances[start] = 0
+	visited = set()
+	stack = [(0, start)]
+	heapify(stack)
+	while stack:
+		dist, idx = heappop(stack)
+		if idx in visited:
+			continue
+		visited.add(idx)
+		for destination, distance in edges[idx]:
+			newDist = minDistances[idx] + distance
+			if newDist < minDistances[destination]:
+				minDistances[destination] = newDist
+				heappush(stack, (newDist, destination))
+	return [dist if dist != float("inf") else -1 for dist in minDistances]
