@@ -53,7 +53,7 @@ def staircaseTraversal(height, maxSteps):
     waysToTop = [1]
 
     for currentHeight in range(1, height + 1):
-        startOfWindow = currentHeight - maxSteps - 1
+        startOfWindow = currentHeight - 1 - maxSteps
         endOfWindow = currentHeight - 1
         if startOfWindow >= 0:
             currentNumberOfWays -= waysToTop[startOfWindow]
