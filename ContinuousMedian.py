@@ -2,12 +2,14 @@
 # the insert method. Feel free to add new
 # properties and methods to the class.
 
+# 1st solution
 class ContinuousMedianHandler:
     def __init__(self):
         self.median = None
         self.minHeap = MinHeap([])
         self.maxHeap = MinHeap([])
 
+    # O(log(n)) time | O(n) space
     def insert(self, number):
         minHeap, maxHeap = self.minHeap, self.maxHeap
         maxHeap.insert(-number)
@@ -87,3 +89,31 @@ class MinHeap:
 
     def swap(self, i, j, heap):
         heap[i], heap[j] = heap[j], heap[i]
+
+# 2nd solution
+from heapq import heappush, heappop
+class ContinuousMedianHandler:
+    def __init__(self):
+        self.median = None
+        self.minHeap =[]
+        self.maxHeap = []
+
+    # O(log(n)) time | O(n) space
+    def insert(self, number):
+        minHeap, maxHeap = self.minHeap, self.maxHeap
+        heappush(maxHeap, -number)
+        value = -heappop(maxHeap)
+        heappush(minHeap, value)
+        value = heappop(minHeap)
+        if len(minHeap) <= len(maxHeap):
+            heappush(minHeap, value)
+        else:
+            heappush(maxHeap, -value)
+
+        if len(minHeap) == len(maxHeap):
+            self.median = (minHeap[0] - maxHeap[0]) / 2.0
+        else:
+            self.median = float(minHeap[0])
+
+    def getMedian(self):
+        return self.median
