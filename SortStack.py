@@ -1,18 +1,17 @@
 # O(n^2) time | O(n) space
 def sortStack(stack):
-    # Write your code here.
-    if not stack:
+    if len(stack) == 0:
         return stack
-    lastNum = stack.pop()
+
+    top = stack.pop()
     sortStack(stack)
-    insertNum(stack, lastNum)
+    insertInSortedOrder(stack, top)
     return stack
 
-def insertNum(stack, num):
-    if not stack or num >= stack[-1]:
-        stack.append(num)
+def insertInSortedOrder(stack, value):
+    if not stack or value >= stack[-1]:
+        stack.append(value)
     else:
-        lastNum = stack.pop()
-        insertNum(stack, num)
-        insertNum(stack, lastNum)
-
+        top = stack.pop()
+        insertInSortedOrder(stack, value)
+        stack.append(top)
