@@ -92,3 +92,23 @@ def laptopRentals(times):
         startIterator += 1
     
     return usedLaptops
+
+# 3rd solution
+# O(n*log(n)) time | O(n) space
+from heapq import heapify, heappush, heappop
+def laptopRentals(times):
+    if len(times) == 0:
+        return 0
+    
+    times.sort(key=lambda x: x[0])
+
+    timesWhenLaptopIsUsed = [[times[0][1], times[0][0]]]
+
+    for idx in range(1, len(times)):
+        start, end = times[idx]
+        if timesWhenLaptopIsUsed[0][0] <= start:
+            heappop(timesWhenLaptopIsUsed)
+        
+        heappush(timesWhenLaptopIsUsed, [end, start])
+    
+    return len(timesWhenLaptopIsUsed)
