@@ -8,11 +8,11 @@ def longestIncreasingSubsequence(array):
         for j in range(i):
             if array[j] < array[i] and dp[j][1]  + 1 > dp[i][1]:
                 dp[i] = [j, dp[j][1] + 1]
-                largestLength = max(largestLength, dp[i][1])
         if dp[i][1] >= largestLength:
+            largestLength = dp[i][1]
             largestIdx = i
-	result = []
-	idx = largestIdx
+    result = []
+    idx = largestIdx
     while idx is not None:
         result.append(array[idx])
         idx = dp[idx][0]

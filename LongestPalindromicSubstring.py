@@ -20,12 +20,12 @@ def isPalindrome(string, start, end):
 # 2nd solution
 # O(n^2) time | O(n) space
 def longestPalindromicSubstring(string):
-    pair = [0, 0]
+    currentLongest = [0, 0]
     for i in range(len(string) - 1):
         odd = getLongestPalindromeFrom(string, i, i)
         even = getLongestPalindromeFrom(string, i, i + 1)
-        pair = max(pair, odd, even, key = lambda x: x[1] - x[0])
-    return string[pair[0]:pair[1] + 1]
+        currentLongest = max(currentLongest, odd, even, key = lambda x: x[1] - x[0])
+    return string[currentLongest[0]: currentLongest[1] + 1]
 
 def getLongestPalindromeFrom(s, start, end):
     while start >= 0 and end < len(s) and s[start] == s[end]:
