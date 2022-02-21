@@ -1,8 +1,8 @@
 # 1st solution
 # O(n) time | O(h) space
 def getLowestCommonManager(topManager, reportOne, reportTwo):
-    one = binarySearch(topManager, reportOne)
-    two = binarySearch(topManager, reportTwo)
+    one = dfs(topManager, reportOne)
+    two = dfs(topManager, reportTwo)
     idx = 0
     while idx < min(len(one), len(two)):
         if one[idx] == two[idx]:
@@ -11,13 +11,13 @@ def getLowestCommonManager(topManager, reportOne, reportTwo):
             break
     return one[idx - 1]
 
-def binarySearch(root, target, path = []):
+def dfs(root, target, path = []):
     if not root:
         return None
     if root.name == target.name:
         return path + [root]
     for node in root.directReports:
-        newPath = binarySearch(node, target, path + [root])
+        newPath = dfs(node, target, path + [root])
         if newPath:
             return newPath
     return None
@@ -42,13 +42,10 @@ def getLowestCommonManager(topManager, reportOne, reportTwo):
             for node in root.directReports:
                 newLevel[node] = level[root] + [node]
         level = newLevel
-    idx = 0
-    while idx < min(len(one), len(two)):
+
+    for idx in reversed(range(min(len(one), len(two)))):
         if one[idx] == two[idx]:
-            idx += 1
-        else:
-            break
-    return one[idx - 1]
+            return one[idx]
 
 # 3rd solution, official
 # O(n) time | O(d) space
