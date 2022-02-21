@@ -13,10 +13,10 @@ def reverseWordsInString(string):
             words.append(' ')
             startOfWord = idx
         
-	words.append(string[startOfWord:])
+    words.append(string[startOfWord:])
 
-	reverseList(words)
-	return ''.join(words)
+    reverseList(words)
+    return ''.join(words)
 
 def reverseList(lst):
     start, end = 0, len(lst) - 1

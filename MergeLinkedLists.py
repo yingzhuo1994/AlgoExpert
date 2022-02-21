@@ -42,7 +42,7 @@ def mergeLinkedLists(headOne, headTwo):
     return headOne if headOne.value < headTwo.value else headTwo
 
 # 3rd solution, recursion
-# O(m + n) time | O(1) space
+# O(m + n) time | O(m + n) space
 def mergeLinkedLists(headOne, headTwo):
     recursiveMerge(headOne, headTwo, None)
     return headOne if headOne.value < headTwo.value else headTwo
