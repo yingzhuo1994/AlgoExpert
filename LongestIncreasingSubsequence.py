@@ -56,14 +56,13 @@ def longestIncreasingSubsequence(array):
     return buildSequence(array, sequences, indices[length])
 
 def binarySearch(startIdx, endIdx, indices, array, num):
-    if startIdx > endIdx:
-        return startIdx
-    middleIdx = (startIdx + endIdx) // 2
-    if array[indices[middleIdx]] < num:
-        startIdx = middleIdx + 1
-    else:
-        endIdx = middleIdx - 1
-    return binarySearch(startIdx, endIdx, indices, array, num)
+	while startIdx <= endIdx:
+		idx = (startIdx + endIdx) // 2
+		if array[indices[idx]] < num:
+			startIdx = idx + 1
+		else:
+			endIdx = idx - 1
+	return startIdx
 
 def buildSequence(array, sequences, currentIdx):
     sequence = []
