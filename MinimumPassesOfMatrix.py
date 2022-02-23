@@ -1,5 +1,6 @@
 # 1st solution
 # O(w * h) time | O(w * h) space
+# where w is the width of the matrix and h is the height
 def minimumPassesOfMatrix(matrix):
     # Write your code here.
     passes = convertNegatives(matrix)
@@ -64,6 +65,7 @@ def containsNegative(matrix):
 
 # 2nd solution
 # O(w * h) time | O(w * h) space
+# where w is the width of the matrix and h is the height
 def minimumPassesOfMatrix(matrix):
     # Write your code here.
     passes = convertNegatives(matrix)
