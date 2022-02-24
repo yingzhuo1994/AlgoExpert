@@ -13,6 +13,9 @@ def quickselect(array, k):
         return middle[0]
 
 # 2nd solution
+# Best: O(n) time | O(1) space
+# Average: O(n) time | O(1) space
+# Worst: O(n^2) time | O(1) space
 def quickselect(array, k):
     position = k - 1
     return quickselectHelper(array, 0, len(array) - 1, position)
