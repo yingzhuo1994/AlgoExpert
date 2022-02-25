@@ -24,3 +24,20 @@ def getNextIdx(array, currentIdx):
     jump = array[currentIdx]
     nextIdx = (currentIdx + jump) % len(array)
     return nextIdx if nextIdx >= 0 else nextIdx + len(array)
+
+# 3rd solution, simplified solution
+# O(n) time | O(1) space
+def hasSingleCycle(array):
+    numElementsVisited = 0
+    currentIdx = 0
+    while numElementsVisited < len(array):
+        numElementsVisited += 1
+        currentIdx = getNextIdx(array, currentIdx)
+        if currentIdx == 0:
+            break
+    return currentIdx == 0 and numElementsVisited == len(array)   
+
+def getNextIdx(array, currentIdx):
+    jump = array[currentIdx]
+    nextIdx = (currentIdx + jump) % len(array)
+    return nextIdx if nextIdx >= 0 else nextIdx + len(array)
