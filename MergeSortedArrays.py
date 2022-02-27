@@ -134,3 +134,19 @@ class MinHeap:
 
     def swap(self, i, j, heap):
         heap[i], heap[j] = heap[j], heap[i]
+
+# 4th solution
+# O(nlog(k) + k) time | O(n + k) space
+# where n is the total number of array elements and k is the number of arrays
+import heapq
+def mergeSortedArrays(arrays):
+    heap = []
+    for i in range(len(arrays)):
+        heapq.heappush(heap, (arrays[i][0], (i, 0)))
+    ans = []
+    while heap:
+        num, (i, j) = heapq.heappop(heap)
+        ans.append(num)
+        if j + 1 < len(arrays[i]):
+            heapq.heappush(heap, (arrays[i][j + 1], (i, j + 1)))
+    return ans
