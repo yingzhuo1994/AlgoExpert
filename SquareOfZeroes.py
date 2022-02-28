@@ -15,8 +15,6 @@ def squareOfZeroes(matrix):
     for i in range(m):
         for j in range(n):
             row, col = dp[i][j]
-            if row == 0 or col == 0:
-                continue
             size = min(row, col)
             for k in range(1, size):
                 if min(dp[i-k][j][1], dp[i][j-k][0]) > k:
