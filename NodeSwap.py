@@ -11,17 +11,14 @@ def nodeSwap(head):
     # printLinkedList(head)
     if head.next is not None:
         newHead = head.next
-    prev = None
-    while head and head.next:
-        first = head
-        second = head.next
-        nextNode = head.next.next
+
+    first, second = head, head.next
+    while first and second:
+        nextNode = second.next
         second.next = first
-        first.next = nextNode
-        if prev is not None:
-            prev.next = second
-        prev = first
-        head = nextNode
+        first.next = nextNode.next if nextNode and nextNode.next else nextNode
+        first = nextNode
+        second = nextNode.next if nextNode else None
     # printLinkedList(newHead)
     return newHead
     
