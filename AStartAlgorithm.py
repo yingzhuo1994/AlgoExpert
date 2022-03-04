@@ -1,13 +1,4 @@
-class Node:
-    def __init__(self, row, col, value):
-        self.id = str(row) + "-" + str(col)
-        self.row = row
-        self.col = col
-        self.value = value
-        self.distanceFromStart = float("inf") # g
-        self.estimatedDistanceToEnd = float("inf") # f = g + h
-        self.cameFrom = None
-
+# 1st solution
 # O(w * h * log(w * h)) time | O(w * h) space
 # where w is the width of the graph and h is the height
 def aStarAlgorithm(startRow, startCol, endRow, endCol, graph):
@@ -104,6 +95,16 @@ def reconstructPath(endNode):
         currentNode = currentNode.cameFrom
     
     return path[::-1]
+
+class Node:
+    def __init__(self, row, col, value):
+        self.id = str(row) + "-" + str(col)
+        self.row = row
+        self.col = col
+        self.value = value
+        self.distanceFromStart = float("inf") # g
+        self.estimatedDistanceToEnd = float("inf") # f = g + h
+        self.cameFrom = None
 
 class MinHeap:
     def __init__(self, array):
