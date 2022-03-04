@@ -22,3 +22,28 @@ def longestStreakOfAdjacentOnes(array):
             largestLength = length
             possibleIdx = idx
     return possibleIdx
+
+# 2nd solution
+# O(n) time | O(n) space
+def longestStreakOfAdjacentOnes(array):
+    possibleIdx = -1
+    largestLength = 0
+    frontIdx = -1
+    frontLength = -1
+    for i, num in enumerate(array):
+        if num == 0:
+            backLength = i - frontIdx - 1
+            length = frontLength + backLength + 1
+            if length > largestLength:
+                largestLength = length
+                possibleIdx = frontIdx
+            frontLength = backLength
+            frontIdx = i
+
+    backLength = len(array) - frontIdx - 1
+    length = frontLength + backLength + 1
+    if length > largestLength:
+        largestLength = length
+        possibleIdx = frontIdx
+
+    return possibleIdx
