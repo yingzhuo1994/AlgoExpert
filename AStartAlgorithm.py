@@ -174,3 +174,56 @@ class MinHeap:
     
     def update(self, node):
         self.siftUp(self.nodePositionsInHeap[node.id], self.heap)
+
+
+# 2nd solution
+# O(w * h * log(w * h)) time | O(w * h) space
+# where w is the width of the graph and h is the height
+import heapq
+def aStarAlgorithm(startRow, startCol, endRow, endCol, graph):
+    nodes =  {}
+    nodes[(startRow, startCol)] = [getManhattanDistance(startRow, startCol, endRow, endCol), 0]
+    stack = [[nodes[(startRow, startCol)][0], (startRow, startCol)]]
+    while stack:
+        totalDistance, node = heapq.heappop(stack)
+        if node == (endRow, endCol):
+            break
+        neighbors = getNeighbors(graph, node[0], node[1])
+        for neighbor in neighbors:
+            step = nodes[node][1] + 1
+            newDistance = step + getManhattanDistance(neighbor[0], neighbor[1], endRow, endCol)
+            if (neighbor in nodes and newDistance < nodes[neighbor][0]) or neighbor not in nodes:
+                nodes[neighbor] = [newDistance, step]
+                heapq.heappush(stack, [newDistance, neighbor])
+    
+    return reconstructPath(startRow, startCol, endRow, endCol, graph, nodes)
+
+def getManhattanDistance(x1, y1, x2, y2):
+    return abs(x1 - x2) + abs(y1 - y2)
+
+def getNeighbors(graph, row, col):
+    neighbors = []
+    for dx, dy in [[0, 1], [0, -1], [1, 0], [-1, 0]]:
+        newRow = row + dx
+        newCol = col + dy
+        if 0 <= newRow < len(graph) and 0 <= newCol < len(graph[0]):
+            if graph[newRow][newCol] != 1:
+                neighbors.append((newRow, newCol))
+    return neighbors
+
+def reconstructPath(startRow, startCol, endRow, endCol, graph, nodes):
+    path = []
+    x, y = endRow, endCol
+    if (x, y) not in nodes:
+        return []
+    while [x, y] != [startRow, startCol]:
+        path.append([x, y])
+        step = nodes[(x, y)][1]
+        neighbors = getNeighbors(graph, x, y)
+        for neighbor in neighbors:
+            if neighbor in nodes and nodes[neighbor][1] == step - 1:
+                x, y = neighbor
+                break
+    path.append([x, y])
+    path.reverse()
+    return path
