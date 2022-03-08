@@ -20,12 +20,35 @@ def balanceIndex(array):
 
 # 2nd solution
 # O(n) time | O(1) space
+# where n is the length of the input array
 def balanceIndex(array):
-    totalSum = sum(array)
-    frontSum = 0
+    arraySum = sum(array)
+
+    leftSideSum = 0
+    rightSideSum = arraySum
     for i in range(len(array)):
-        backSum = totalSum - frontSum - array[i]
-        if frontSum == backSum:
+        rightSideSum -= array[i]
+        if leftSideSum == rightSideSum:
             return i
-        frontSum += array[i]
+        leftSideSum += array[i]
+
+    return -1
+
+# 3rd solution
+# O(n) time | O(n) space
+# where n is the length of the input array
+def balanceIndex(array):
+    leftSideSums = array[:]
+
+    leftSideSum = 0
+    for i in range(len(array)):
+        leftSideSums[i] = leftSideSum
+        leftSideSum += array[i]
+    
+    rightSideSum = 0
+    for i in reversed(range(len(array))):
+        if leftSideSums[i] == rightSideSum:
+            return i
+        rightSideSum += array[i]
+    
     return -1
