@@ -4,14 +4,20 @@
 def repeatedMatrixValues(matrix):
     answerSet = set(matrix[0])
     for i in range(1, len(matrix)):
-        curRowSet = set(matrix[i])
-        answerSet = answerSet.intersection(curRowSet)
+        curRowSet = set()
+        for j in range(len(matrix[0])):
+            value = matrix[i][j]
+            if value in answerSet:
+                curRowSet.add(value)
+        answerSet = curRowSet
 
     for j in range(len(matrix[0])):
         curColSet = set()
         for i in range(len(matrix)):
-            curColSet.add(matrix[i][j])
-        answerSet = answerSet.intersection(curColSet)
+            value = matrix[i][j]
+            if value in answerSet:
+                curColSet.add(value)
+        answerSet = curColSet
     return list(answerSet)
 
 # 2nd solution
