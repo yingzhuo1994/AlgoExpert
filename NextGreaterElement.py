@@ -4,7 +4,7 @@ def nextGreaterElement(array):
     newArray = []
     for i in range(len(array)):
         newArray.append(getNextGreaterElement(array, i))
-	return newArray
+    return newArray
 
 def getNextGreaterElement(array, idx):
     for i in range(idx + 1, len(array)):
